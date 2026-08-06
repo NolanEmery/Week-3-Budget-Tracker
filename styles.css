@@ -1,0 +1,662 @@
+/* ========== CSS Variables & Reset ========== */
+:root {
+    --green-50: #f0fdf4;
+    --green-100: #dcfce7;
+    --green-200: #bbf7d0;
+    --green-300: #86efac;
+    --green-400: #4ade80;
+    --green-500: #22c55e;
+    --green-600: #16a34a;
+    --green-700: #15803d;
+    --green-800: #166534;
+    --white: #ffffff;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --red-500: #ef4444;
+    --red-100: #fee2e2;
+    --yellow-500: #eab308;
+    --yellow-100: #fef9c3;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+    --transition: all 0.25s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+    background: linear-gradient(135deg, var(--green-50) 0%, var(--white) 50%, var(--green-100) 100%);
+    color: var(--gray-800);
+    min-height: 100vh;
+}
+
+/* ========== App Layout ========== */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ========== Sidebar ========== */
+.sidebar {
+    width: 260px;
+    background: var(--white);
+    border-right: 1px solid var(--green-100);
+    padding: 24px 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    margin-bottom: 32px;
+}
+
+.logo-icon {
+    font-size: 32px;
+}
+
+.logo h1 {
+    font-size: 20px;
+    color: var(--green-700);
+    font-weight: 700;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--gray-600);
+    font-weight: 500;
+    font-size: 15px;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    background: var(--green-50);
+    color: var(--green-700);
+}
+
+.nav-link.active {
+    background: var(--green-500);
+    color: var(--white);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.nav-link .icon {
+    font-size: 20px;
+}
+
+/* ========== Main Content ========== */
+.main-content {
+    flex: 1;
+    margin-left: 260px;
+    padding: 32px 40px;
+    max-width: 1200px;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 24px;
+}
+
+/* ========== Tab Content ========== */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== Cards ========== */
+.card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--green-100);
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.card h3 {
+    font-size: 16px;
+    color: var(--gray-700);
+    margin-bottom: 16px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.card-header h3 {
+    margin-bottom: 0;
+}
+
+/* ========== Overview Cards ========== */
+.overview-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.overview-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+}
+
+.overview-card .card-icon {
+    font-size: 36px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: var(--green-50);
+}
+
+.overview-card .card-content h3 {
+    font-size: 13px;
+    color: var(--gray-500);
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.overview-card .card-content .amount {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gray-800);
+}
+
+.income-icon { background: var(--green-100) !important; }
+.expense-icon { background: var(--red-100) !important; }
+.balance-icon { background: var(--green-200) !important; }
+
+/* ========== AI Budget Card ========== */
+.ai-budget-card {
+    border: 2px solid var(--green-200);
+    background: linear-gradient(135deg, var(--white) 0%, var(--green-50) 100%);
+}
+
+.budget-content {
+    line-height: 1.8;
+}
+
+.budget-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    border: 1px solid var(--green-100);
+}
+
+.budget-item .label {
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+.budget-item .value {
+    font-weight: 700;
+    color: var(--green-600);
+}
+
+.budget-tip {
+    background: var(--green-100);
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--green-800);
+    border-left: 4px solid var(--green-500);
+}
+
+/* ========== Savings Goal Card ========== */
+.savings-goal-card {
+    border: 2px solid var(--green-200);
+    background: linear-gradient(135deg, var(--white) 0%, var(--green-50) 100%);
+}
+
+.savings-goal-display {
+    margin-top: 16px;
+}
+
+.savings-goal-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.savings-goal-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.savings-goal-title .item-name {
+    font-size: 18px;
+}
+
+.savings-goal-amounts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+.savings-goal-percent {
+    color: var(--green-600);
+    font-weight: 700;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 14px;
+    background: var(--green-100);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green-400), var(--green-600));
+    border-radius: 20px;
+    transition: width 0.5s ease;
+}
+
+.progress-fill.reached {
+    background: linear-gradient(90deg, var(--green-500), var(--green-700));
+}
+
+.savings-goal-status {
+    font-size: 14px;
+    color: var(--green-800);
+    background: var(--green-100);
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    border-left: 4px solid var(--green-500);
+}
+
+/* ========== Buttons ========== */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background: var(--green-500);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: var(--green-600);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: var(--green-50);
+    color: var(--green-700);
+    border: 1px solid var(--green-200);
+}
+
+.btn-secondary:hover {
+    background: var(--green-100);
+}
+
+.btn-danger {
+    background: var(--red-100);
+    color: var(--red-500);
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.btn-danger:hover {
+    background: var(--red-500);
+    color: var(--white);
+}
+
+.btn-check {
+    background: var(--green-50);
+    color: var(--green-600);
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.btn-check:hover {
+    background: var(--green-500);
+    color: var(--white);
+}
+
+/* ========== Forms ========== */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    align-items: end;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-600);
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px 14px;
+    border: 2px solid var(--green-100);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    color: var(--gray-800);
+    transition: var(--transition);
+    background: var(--white);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--green-400);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+/* ========== Transactions List ========== */
+.transactions-list,
+.subscriptions-list,
+.payments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.transaction-item,
+.subscription-item,
+.payment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: var(--gray-50);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.transaction-item:hover,
+.subscription-item:hover,
+.payment-item:hover {
+    background: var(--green-50);
+    border-color: var(--green-200);
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.item-name {
+    font-weight: 600;
+    color: var(--gray-800);
+    font-size: 15px;
+}
+
+.item-meta {
+    font-size: 12px;
+    color: var(--gray-500);
+}
+
+.item-amount {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.item-amount.income {
+    color: var(--green-600);
+}
+
+.item-amount.expense {
+    color: var(--red-500);
+}
+
+.item-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* ========== Payment-specific styles ========== */
+.payment-item.completed {
+    opacity: 0.6;
+    text-decoration: line-through;
+}
+
+.payment-item.overdue {
+    border-left: 4px solid var(--red-500);
+    background: var(--red-100);
+}
+
+.payment-item.upcoming {
+    border-left: 4px solid var(--yellow-500);
+    background: var(--yellow-100);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-badge.pending {
+    background: var(--yellow-100);
+    color: var(--yellow-500);
+}
+
+.status-badge.completed {
+    background: var(--green-100);
+    color: var(--green-600);
+}
+
+.status-badge.overdue {
+    background: var(--red-100);
+    color: var(--red-500);
+}
+
+/* ========== Subscription badge ========== */
+.sub-category {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--green-100);
+    color: var(--green-700);
+    text-transform: capitalize;
+}
+
+/* ========== Filter ========== */
+.filter-group select {
+    padding: 8px 12px;
+    border: 2px solid var(--green-100);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    background: var(--white);
+}
+
+/* ========== Notification ========== */
+.notification {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    background: var(--white);
+    border: 2px solid var(--green-400);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    animation: slideIn 0.4s ease;
+    max-width: 400px;
+}
+
+.notification.hidden {
+    display: none;
+}
+
+.notification-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--green-500);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.notification-text {
+    font-size: 14px;
+    color: var(--gray-700);
+    font-weight: 500;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--gray-400);
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* ========== Empty State ========== */
+.empty-state {
+    text-align: center;
+    padding: 32px;
+    color: var(--gray-400);
+    font-size: 14px;
+}
+
+/* ========== Scrollbar ========== */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--green-200);
+    border-radius: 3px;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 72px;
+        padding: 16px 8px;
+    }
+    .logo h1, .nav-link span:not(.icon) {
+        display: none;
+    }
+    .nav-link {
+        justify-content: center;
+        padding: 14px;
+    }
+    .main-content {
+        margin-left: 72px;
+        padding: 20px;
+    }
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    .overview-cards {
+        grid-template-columns: 1fr;
+    }
+}

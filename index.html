@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker - Smart Money Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">💰</div>
+                <h1>FinanceTracker</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#dashboard" class="nav-link active" data-tab="dashboard">
+                    <span class="icon">📊</span>
+                    <span>Dashboard</span>
+                </a></li>
+                <li><a href="#transactions" class="nav-link" data-tab="transactions">
+                    <span class="icon">💳</span>
+                    <span>Transactions</span>
+                </a></li>
+                <li><a href="#subscriptions" class="nav-link" data-tab="subscriptions">
+                    <span class="icon">🔄</span>
+                    <span>Subscriptions</span>
+                </a></li>
+                <li><a href="#payments" class="nav-link" data-tab="payments">
+                    <span class="icon">📅</span>
+                    <span>Upcoming Payments</span>
+                </a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Notification Area -->
+            <div id="notification" class="notification hidden">
+                <span class="notification-icon">✓</span>
+                <span class="notification-text"></span>
+                <button class="notification-close">×</button>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <h2 class="page-title">Dashboard</h2>
+                
+                <!-- Money Overview Cards -->
+                <div class="overview-cards">
+                    <div class="card overview-card">
+                        <div class="card-icon income-icon">💵</div>
+                        <div class="card-content">
+                            <h3>Total Income</h3>
+                            <p class="amount" id="total-income">$0.00</p>
+                        </div>
+                    </div>
+                    <div class="card overview-card">
+                        <div class="card-icon expense-icon">💸</div>
+                        <div class="card-content">
+                            <h3>Total Expenses</h3>
+                            <p class="amount" id="total-expenses">$0.00</p>
+                        </div>
+                    </div>
+                    <div class="card overview-card">
+                        <div class="card-icon balance-icon">💰</div>
+                        <div class="card-content">
+                            <h3>Current Balance</h3>
+                            <p class="amount" id="current-balance">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Savings Goal Section -->
+                <div class="card savings-goal-card">
+                    <div class="card-header">
+                        <h3>🎯 Savings Goal</h3>
+                    </div>
+                    <form id="savings-goal-form" class="form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>What are you saving for?</label>
+                                <input type="text" id="savings-goal-name" placeholder="e.g., New Laptop, Vacation" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Goal Amount ($)</label>
+                                <input type="number" id="savings-goal-amount" step="0.01" min="0" placeholder="e.g., 1500" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Set Goal</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="savings-goal-display" class="savings-goal-display"></div>
+                </div>
+
+                <!-- AI Budget Section -->
+                <div class="card ai-budget-card">
+                    <div class="card-header">
+                        <h3>🤖 AI Daily Budget Recommendation</h3>
+                        <button class="btn btn-primary" id="generate-budget">Generate Budget</button>
+                    </div>
+                    <div id="budget-content" class="budget-content">
+                        <p class="empty-state">Click "Generate Budget" to get AI-powered spending recommendations</p>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Recent Transactions</h3>
+                        <button class="btn btn-secondary" onclick="switchTab('transactions')">View All</button>
+                    </div>
+                    <div id="recent-transactions" class="transactions-list">
+                        <p class="empty-state">No transactions yet. Add your first transaction!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Tab -->
+            <div id="transactions" class="tab-content">
+                <h2 class="page-title">Transactions</h2>
+                
+                <!-- Add Transaction Form -->
+                <div class="card">
+                    <h3>Add Transaction</h3>
+                    <form id="transaction-form" class="form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Type</label>
+                                <select id="transaction-type" required>
+                                    <option value="income">Income</option>
+                                    <option value="expense">Expense</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Amount ($)</label>
+                                <input type="number" id="transaction-amount" step="0.01" min="0" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input type="text" id="transaction-description" placeholder="e.g., Salary, Groceries" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="transaction-category" required>
+                                    <option value="salary">Salary</option>
+                                    <option value="freelance">Freelance</option>
+                                    <option value="food">Food & Dining</option>
+                                    <option value="transport">Transport</option>
+                                    <option value="entertainment">Entertainment</option>
+                                    <option value="utilities">Utilities</option>
+                                    <option value="shopping">Shopping</option>
+                                    <option value="health">Health</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" id="transaction-date" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Add Transaction</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Transactions List -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>All Transactions</h3>
+                        <div class="filter-group">
+                            <select id="filter-type">
+                                <option value="all">All Types</option>
+                                <option value="income">Income</option>
+                                <option value="expense">Expense</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="all-transactions" class="transactions-list">
+                        <p class="empty-state">No transactions yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subscriptions Tab -->
+            <div id="subscriptions" class="tab-content">
+                <h2 class="page-title">Subscriptions</h2>
+                
+                <!-- Add Subscription Form -->
+                <div class="card">
+                    <h3>Add Subscription</h3>
+                    <form id="subscription-form" class="form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Service Name</label>
+                                <input type="text" id="subscription-name" placeholder="e.g., Netflix, Spotify" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Amount ($/month)</label>
+                                <input type="number" id="subscription-amount" step="0.01" min="0" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Billing Cycle</label>
+                                <select id="subscription-cycle" required>
+                                    <option value="monthly">Monthly</option>
+                                    <option value="yearly">Yearly</option>
+                                    <option value="weekly">Weekly</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Next Billing Date</label>
+                                <input type="date" id="subscription-date" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="subscription-category" required>
+                                    <option value="streaming">Streaming</option>
+                                    <option value="software">Software</option>
+                                    <option value="gaming">Gaming</option>
+                                    <option value="music">Music</option>
+                                    <option value="news">News & Media</option>
+                                    <option value="fitness">Fitness</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Add Subscription</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Subscriptions Summary -->
+                <div class="overview-cards">
+                    <div class="card overview-card">
+                        <div class="card-icon">📊</div>
+                        <div class="card-content">
+                            <h3>Monthly Total</h3>
+                            <p class="amount" id="subscriptions-monthly">$0.00</p>
+                        </div>
+                    </div>
+                    <div class="card overview-card">
+                        <div class="card-icon">📈</div>
+                        <div class="card-content">
+                            <h3>Yearly Total</h3>
+                            <p class="amount" id="subscriptions-yearly">$0.00</p>
+                        </div>
+                    </div>
+                    <div class="card overview-card">
+                        <div class="card-icon">🔢</div>
+                        <div class="card-content">
+                            <h3>Active Subscriptions</h3>
+                            <p class="amount" id="subscriptions-count">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscriptions List -->
+                <div class="card">
+                    <h3>Your Subscriptions</h3>
+                    <div id="subscriptions-list" class="subscriptions-list">
+                        <p class="empty-state">No subscriptions added yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Payments Tab -->
+            <div id="payments" class="tab-content">
+                <h2 class="page-title">Upcoming Payments</h2>
+                
+                <!-- Add Payment Form -->
+                <div class="card">
+                    <h3>Add Upcoming Payment</h3>
+                    <form id="payment-form" class="form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Payment Name</label>
+                                <input type="text" id="payment-name" placeholder="e.g., Rent, Car Insurance" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Amount ($)</label>
+                                <input type="number" id="payment-amount" step="0.01" min="0" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Due Date</label>
+                                <input type="date" id="payment-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select id="payment-status" required>
+                                    <option value="pending">Pending</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Notes (optional)</label>
+                                <input type="text" id="payment-notes" placeholder="Additional details">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Add Payment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Payments Summary -->
+                <div class="overview-cards">
+                    <div class="card overview-card">
+                        <div class="card-icon">⏰</div>
+                        <div class="card-content">
+                            <h3>Pending Payments</h3>
+                            <p class="amount" id="payments-pending">0</p>
+                        </div>
+                    </div>
+                    <div class="card overview-card">
+                        <div class="card-icon">💵</div>
+                        <div class="card-content">
+                            <h3>Total Due</h3>
+                            <p class="amount" id="payments-total-due">$0.00</p>
+                        </div>
+                    </div>
+                    <div class="card overview-card">
+                        <div class="card-icon">✓</div>
+                        <div class="card-content">
+                            <h3>Completed</h3>
+                            <p class="amount" id="payments-completed">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payments List -->
+                <div class="card">
+                    <h3>Payment Todo List</h3>
+                    <div id="payments-list" class="payments-list">
+                        <p class="empty-state">No upcoming payments added</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
