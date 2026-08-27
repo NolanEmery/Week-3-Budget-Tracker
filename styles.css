@@ -268,11 +268,11 @@ body {
 /* ========== Savings Goal Card ========== */
 .savings-goal-card {
     border: 2px solid var(--green-200);
-    background: linear-gradient(135deg, var(--white) 0%, var(--green-50) 100%);
+    background: var(--green-100);
 }
 
 .savings-goal-display {
-    margin-top: 16px;
+    margin-top: 16px;  
 }
 
 .savings-goal-info {
@@ -307,14 +307,14 @@ body {
 .progress-bar {
     width: 100%;
     height: 14px;
-    background: var(--green-100);
+    background: var(--white);
     border-radius: 20px;
     overflow: hidden;
 }
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--green-400), var(--green-600));
+    background: var(--gray-500);
     border-radius: 20px;
     transition: width 0.5s ease;
 }
